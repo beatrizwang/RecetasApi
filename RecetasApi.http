@@ -1,0 +1,85 @@
+@host = http://localhost:5080
+
+### Listar alimentos (paginado, con filtros opcionales)
+GET {{host}}/api/alimentos?page=1&pageSize=10&q=po&categoria=Carne
+
+### Obtener un alimento
+GET {{host}}/api/alimentos/1
+
+### Crear un alimento
+POST {{host}}/api/alimentos
+Content-Type: application/json
+
+{
+  "nombre": "Lentejas",
+  "categoria": "Legumbre",
+  "caloriasPor100g": 353
+}
+
+### Actualizar un alimento
+PUT {{host}}/api/alimentos/7
+Content-Type: application/json
+
+{
+  "nombre": "Lentejas pardinas",
+  "categoria": "Legumbre",
+  "caloriasPor100g": 350
+}
+
+### Eliminar un alimento (409 si está en alguna receta)
+DELETE {{host}}/api/alimentos/7
+
+### Listar recetas (filtros: q, dificultad, alimento)
+GET {{host}}/api/recetas?alimento=pollo&dificultad=Facil
+
+### Crear una receta (los ingredientes van anidados)
+POST {{host}}/api/recetas
+Content-Type: application/json
+
+{
+  "nombre": "Arroz con pollo",
+  "descripcion": "Receta sencilla de arroz con pollo y tomate.",
+  "porciones": 4,
+  "tiempoPreparacionMin": 45,
+  "dificultad": "Facil",
+  "ingredientes": [
+    { "alimentoId": 1, "cantidad": 300, "unidad": "Gramos" },
+    { "alimentoId": 2, "cantidad": 200, "unidad": "Gramos" },
+    { "alimentoId": 3, "cantidad": 150, "unidad": "Gramos" },
+    { "alimentoId": 4, "cantidad": 30,  "unidad": "Mililitros" }
+  ]
+}
+
+### Detalle de una receta (con calorías totales y por porción)
+GET {{host}}/api/recetas/1
+
+### Actualizar una receta (reemplaza los datos y sincroniza los ingredientes)
+PUT {{host}}/api/recetas/1
+Content-Type: application/json
+
+{
+  "nombre": "Arroz con pollo",
+  "descripcion": "Versión sin aceite.",
+  "porciones": 4,
+  "tiempoPreparacionMin": 40,
+  "dificultad": "Media",
+  "ingredientes": [
+    { "alimentoId": 1, "cantidad": 300, "unidad": "Gramos" },
+    { "alimentoId": 2, "cantidad": 200, "unidad": "Gramos" }
+  ]
+}
+
+### Eliminar una receta
+DELETE {{host}}/api/recetas/1
+
+### Caso de error: alimento inexistente (400)
+POST {{host}}/api/recetas
+Content-Type: application/json
+
+{
+  "nombre": "Receta inválida",
+  "porciones": 2,
+  "tiempoPreparacionMin": 10,
+  "dificultad": "Facil",
+  "ingredientes": [ { "alimentoId": 999, "cantidad": 100, "unidad": "Gramos" } ]
+}
