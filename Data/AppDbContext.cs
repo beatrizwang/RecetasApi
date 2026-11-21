@@ -3,7 +3,7 @@ using RecetasApi.Models;
 
 namespace RecetasApi.Data;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options), IUnitOfWork
 {
     public DbSet<Alimento> Alimentos => Set<Alimento>();
     public DbSet<Receta> Recetas => Set<Receta>();

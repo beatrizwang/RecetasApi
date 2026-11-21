@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using RecetasApi.Data;
 using RecetasApi.Errors;
+using RecetasApi.Repositories;
 using RecetasApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Servicios con vida Scoped: una instancia por petición, igual que el DbContext.
 builder.Services.AddScoped<IAlimentoService, AlimentoService>();
 builder.Services.AddScoped<IRecetaService, RecetaService>();
+// El DbContext hace de unidad de trabajo: se expone con la interfaz, pero es la misma instancia Scoped.
+builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<AppDbContext>());
+builder.Services.AddScoped<IAlimentoRepository, AlimentoRepository>();
+builder.Services.AddScoped<IRecetaRepository, RecetaRepository>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
