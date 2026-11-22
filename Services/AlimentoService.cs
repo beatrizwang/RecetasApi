@@ -2,7 +2,7 @@ using RecetasApi.Data;
 using RecetasApi.Dtos;
 using RecetasApi.Errors;
 using RecetasApi.Models;
-using RecetasApi.Repositories;
+using RecetasApi.Interfaces;
 
 namespace RecetasApi.Services;
 

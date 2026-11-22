@@ -1,6 +1,6 @@
 using RecetasApi.Models;
 
-namespace RecetasApi.Repositories;
+namespace RecetasApi.Interfaces;
 
 public interface IRecetaRepository
 {

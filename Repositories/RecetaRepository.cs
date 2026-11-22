@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RecetasApi.Data;
+using RecetasApi.Interfaces;
 using RecetasApi.Models;
 
 namespace RecetasApi.Repositories;

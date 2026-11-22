@@ -1,6 +1,4 @@
-using RecetasApi.Models;
-
-namespace RecetasApi.Repositories;
+namespace RecetasApi.Models;
 
 /// <summary>Una línea de ingrediente reducida a lo necesario para calcular calorías.</summary>
 public sealed record LineaNutricional(double CaloriasPor100g, double Cantidad);

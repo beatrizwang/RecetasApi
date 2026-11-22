@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using RecetasApi.Data;
 using RecetasApi.Errors;
+using RecetasApi.Interfaces;
 using RecetasApi.Repositories;
 using RecetasApi.Services;
 
